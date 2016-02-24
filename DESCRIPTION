@@ -1,0 +1,11 @@
+Package: rrawaudio
+Title: Play R objects with /dev/dsp
+Version: 0.0.1
+Authors@R: person('Thomas', 'Levine',
+                  email = '_@thomaslevine.com',
+                  role = c('aut', 'cre'))
+Description:
+  Play R objects sort of live but not realtime.
+  It uses /dev/dsp (Open Sound System) and is thus not very portable.
+Depends: R (>= 3.2.2)
+License: AGPL
