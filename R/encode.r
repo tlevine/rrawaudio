@@ -1,4 +1,4 @@
-U8 <- function(x) {
+encode <- function(x) {
   if (any(is.na(x)) || min(x) < -1 || max(x) > 1)
     stop('You must normalize and remove NAs.')
   else
