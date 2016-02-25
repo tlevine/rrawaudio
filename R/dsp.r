@@ -16,7 +16,8 @@ dsp.socket.write <- function(force.new=FALSE) {
     remove('socket.write', envir=.env)
   }
   if (!('socket.write' %in% ls(.env))) {
-    con <- socketConnection(port=get('port', .env), open='a+b')
+    con <- socketConnection(port=get('port', .env),
+                            server=TRUE, open='a+b')
     assign('socket.write', con, .env)
   }
   get('socket.write', .env)
@@ -27,8 +28,8 @@ dsp.socket.read <- function(force.new=FALSE, ...) {
     remove('socket.read', envir=.env)
   }
   if (!('socket.read' %in% ls(.env))) {
-    con <- socketConnection(port=get('port', .env), open='rb', server=TRUE,
-                            ...)
+    con <- socketConnection(port=get('port', .env), blocking=FALSE,
+                            server=FALSE, open='rb', ...)
     assign('socket.read', con, .env)
   }
   get('socket.read', .env)
