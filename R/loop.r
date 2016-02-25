@@ -8,7 +8,7 @@ loop.service <- function(params, next.sample=NULL) {
   almost.next.time <- next.time - params$buffer
 
   if (almost.next.time < Sys.time()) {
-    params$play(next.sample, params$out)
+    writeBin(next.sample, params$out)
     params$prev.time <- max(next.time, Sys.time())
   }
   params
@@ -18,9 +18,9 @@ loop.service <- function(params, next.sample=NULL) {
 # bitrate = 8000 # per second
 # buffer = 1/12 # seconds
 #' @export
-loop.new <- function(out, .bitrate=8000, .buffer=1/2, .play=play) {
+loop.new <- function(out, .bitrate=8000, .buffer=1/2) {
   silence <- rep(0, .bitrate/2) # half second of silence
-  params <- list(bitrate=.bitrate, buffer=.buffer, play=.play,
+  params <- list(bitrate=.bitrate, buffer=.buffer,
                  out=out, prev.time=Sys.time(), prev.sample=silence)
   loop.service(params, params$next.sample)
 }
