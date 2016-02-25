@@ -1,7 +1,7 @@
 .env <- new.env()
 .env$port <- 22222
 
-dsp <- function(force.new=FALSE, block=TRUE) {
+dsp.dev <- function(force.new=FALSE, block=TRUE) {
   if (force.new && 'dsp' %in% ls(.env)) {
     close(get('dsp', .env))
     remove('dsp', envir=.env)
@@ -10,7 +10,7 @@ dsp <- function(force.new=FALSE, block=TRUE) {
     assign('dsp', file('/dev/dsp', open = 'wb', blocking=block), .env)
   get('dsp', .env)
 }
-socket <- function(force.new=FALSE, block=TRUE) {
+dsp.socket <- function(force.new=FALSE, block=TRUE) {
   if (force.new && 'socket' %in% ls(.env)) {
     close(get('socket', .env))
     remove('socket', envir=.env)
