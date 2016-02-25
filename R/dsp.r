@@ -1,25 +1,38 @@
 .env <- new.env()
 .env$port <- 22222
 
-dsp.dev <- function(force.new=FALSE, block=TRUE) {
+dsp.dev <- function(force.new=FALSE) {
   if (force.new && 'dsp' %in% ls(.env)) {
     close(get('dsp', .env))
     remove('dsp', envir=.env)
   }
   if (!('dsp' %in% ls(.env)))
-    assign('dsp', file('/dev/dsp', open = 'wb', blocking=block), .env)
+    assign('dsp', file('/dev/dsp', open = 'w+b'), .env)
   get('dsp', .env)
 }
-dsp.socket <- function(force.new=FALSE, block=TRUE) {
-  if (force.new && 'socket' %in% ls(.env)) {
-    close(get('socket', .env))
-    remove('socket', envir=.env)
+dsp.socket.write <- function(force.new=FALSE) {
+  if (force.new && 'socket.write' %in% ls(.env)) {
+    close(get('socket.write', .env))
+    remove('socket.write', envir=.env)
   }
-  if (!('socket' %in% ls(.env))) {
-    con <- socketConnection(port=get('port', .env), blocking=block,
-                            open='a+b')
-    assign('socket', con, .env)
+  if (!('socket.write' %in% ls(.env))) {
+    con <- socketConnection(port=get('port', .env), open='a+b')
+    assign('socket.write', con, .env)
   }
-  get('socket', .env)
+  get('socket.write', .env)
 }
-play <- function(x, dsp) writeBin(encode(x), dsp)
+dsp.socket.read <- function(force.new=FALSE) {
+  if (force.new && 'socket.read' %in% ls(.env)) {
+    close(get('socket.read', .env))
+    remove('socket.read', envir=.env)
+  }
+  if (!('socket.read' %in% ls(.env))) {
+    con <- socketConnection(port=get('port', .env), open='rb', server=TRUE)
+    assign('socket.read', con, .env)
+  }
+  get('socket.read', .env)
+}
+play <- function(x, dsp) {
+  writeBin(encode(x), dsp)
+  flush(dsp)
+}
