@@ -21,13 +21,14 @@ dsp.socket.write <- function(force.new=FALSE) {
   }
   get('socket.write', .env)
 }
-dsp.socket.read <- function(force.new=FALSE) {
+dsp.socket.read <- function(force.new=FALSE, ...) {
   if (force.new && 'socket.read' %in% ls(.env)) {
     close(get('socket.read', .env))
     remove('socket.read', envir=.env)
   }
   if (!('socket.read' %in% ls(.env))) {
-    con <- socketConnection(port=get('port', .env), open='rb', server=TRUE)
+    con <- socketConnection(port=get('port', .env), open='rb', server=TRUE,
+                            ...)
     assign('socket.read', con, .env)
   }
   get('socket.read', .env)
