@@ -15,3 +15,13 @@ wapply <- function(seconds, f, bitrate=8000) {
   n <- round(seconds*bitrate)
   f(rep(1:n, ceiling(seconds))[1:n]/bitrate)
 }
+
+#' Generate frequencies in 12-tone equal temperment (12-TET)
+#' @param n This note number
+#' @param P.a Base frequency
+#' @param a Base note number
+#' @examples
+#'   P.n(40)
+#'   P.n(c(40, 42, 43))
+P.n <- absolute.frequency <- function(n, P.a = 440, a = 49)
+  P.a * (2^(1/12))^(n - a)

@@ -7,7 +7,7 @@ dsp.dev <- function(force.new=FALSE) {
     remove('dsp', envir=.env)
   }
   if (!('dsp' %in% ls(.env)))
-    assign('dsp', file('/dev/dsp', open = 'w+b'), .env)
+    assign('dsp', file('/dev/dsp', open = 'a+b'), .env)
   get('dsp', .env)
 }
 dsp.socket.write <- function(force.new=FALSE) {
