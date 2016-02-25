@@ -13,5 +13,5 @@ scale.wave <- function(x)
 #'   A4 <- wapply(1.5, A4.fun)
 wapply <- function(seconds, f, bitrate=8000) {
   n <- round(seconds*bitrate)
-  f((1:n)/n)
+  f(rep(1:n, ceiling(seconds))[1:n]/bitrate)
 }
