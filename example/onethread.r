@@ -27,7 +27,10 @@ song <- function(base.pitch=52, speed=4, scale=major.scale)
 # the.song <- song(speed=3)
 the.song <- function(x) {
 # sin((1+cos(3*x))*220*x*2*pi)
-  sawtooth(220*(1+cos(x/3)), x)
+# sawtooth(220*(1+cos(x/3)), x)
 }
 
-play(scale.wave(wapply(8, the.song)), d)
+# play(scale.wave(wapply(8, the.song)), d)
+
+x <- seq(-4,4,0.00001)
+play(sawtooth(P.n(12*(dnorm(x) / dnorm(0)),0), x+4), d)
