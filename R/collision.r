@@ -2,17 +2,24 @@
 # http://studio.substack.net/collision?time=1454555713931
 
 collision <- function (.t) {
+  # Parameters
   melody <- c(3,3,-1,-1,8,9,5,5,5,5,6)
   phase <- c(.07,.11,.04,.08,.13,.03)
   base <- c(1,-5,2,8)
+  tempo <- 72/60
 
-  # Tempo
-  t <- .t * 72/60
+  # Local instruments
+  t <- .t * tempo
+  .sawtooth <- curry(sawtooth, t)
+  .sine <- curry(sine, t)
+  .tri <- curry(tri, t)
+  .square <- curry(square, t)
 
   m <- 2^melody[floor(t)%%length(melody)]/12
   n <- 2^melody[floor(t/2)%%length(melody)]/12
   p <- phase[floor(t/8)%%length(phase)]
   b <- 2^base[floor(t)%%length(base)]/12
+
   sin_(2000+sin(1/4)*8*(3+sin(1/8))/4,t%4/8+1)
     * (1-sq(6))/2 * sin_(240+sin(200),t%4/8+sin(400)/8/8/4)
     * (1-saw(4)*0.6-saw(2)*0.3-saw_(1,t-0.05)*0.4)/2 * 0.3 +
