@@ -12,8 +12,12 @@ collision <- function (.t) {
   t <- .t * tempo
   saw <- curry(sawtooth, t)
   sin <- curry(sine, t)
-  tri <- curry(tri, t)
+  tri <- curry(triangle, t)
    sq <- curry(square, t)
+  saw_ <- sawtooth
+  sin_ <- sine
+  tri_ <- triangle
+   sq_ <- square
 
   m <- 2^melody[floor(t)%%length(melody)]/12
   n <- 2^melody[floor(t/2)%%length(melody)]/12

@@ -14,7 +14,7 @@ sine <- function(frequency, seconds)
 #' Generate a triangle wave.
 #' @param frequency Frequency (440 is middle A.)
 #' @param seconds The time dimension, a vector of times in seconds
-tri <- function(frequency, seconds)
+triangle <- function(frequency, seconds)
   abs(1 - seconds %% (1/frequency) * frequency * 2) * 2 - 1
 
 #' Generate a square wave.
