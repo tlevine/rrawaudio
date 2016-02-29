@@ -22,14 +22,4 @@ collision <- function (.t) {
     * (1-saw(2)*0.3-saw(1/2)*0.6)/2 * 0.8 +
   tri_(tri_(tri(600.29*b)/8,t%2/4+.2),t%1/2+.6+p) +
     * (1-saw(1/2))/2 * 0.4
-
-  function tri_ (x,t) { return Math.abs(1 - t % (1/x) * x * 2) * 2 - 1 }
-  function tri (x) { return tri_(x,t) }
-  function saw_ (x,t) { return t%(1/x)*x*2-1 }
-  function saw (x) { return saw_(x,t) }
-  function sin_ (x,t) { return Math.sin(2 * Math.PI * t * x) }
-  function sin (x) { return sin_(x,t) }
-  function sq_ (x,t) { return t*x % 1 < 0.5 ? -1 : 1 }
-  function sq (x) { return sq_(x,t) }
-  function clamp (x) { return Math.max(-1,Math.min(1,x)) }
 }
