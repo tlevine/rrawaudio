@@ -34,16 +34,10 @@ collision <- function (.t) {
     (1-saw(2)*0.3-saw(1/2)*0.6)/2 * 0.8 +
     tri_(tri_(tri(600.29*b)/8,t%%2/4+.2),t%%1/2+.6+p) *
     (1-saw(1/2))/2 * 0.4
-
-#  x[is.nan(x)] <- mapply(mean,
-#                         x[(1:length(t))[is.nan(x)]-1],
-#                         x[(1:length(t))[is.nan(x)]+1])
-   x
+  x
 }
 
 main <- function() {
-  library(devtools)
-  load_all()
   t <- seq(30*BITRATE,35*BITRATE)/BITRATE
-  collision(t)
+  play(collision(t)*0.5)
 }
