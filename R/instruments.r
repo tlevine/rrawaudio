@@ -21,7 +21,7 @@ triangle <- function(frequency, seconds)
 #' @param frequency Frequency (440 is middle A.)
 #' @param seconds The time dimension, a vector of times in seconds
 square <- function(frequency, seconds)
-  if ((seconds * frequency %% 1) < 0.5) -1 else 1
+  ifelse((seconds * frequency %% 1) > 0.5, 1, -1)
 
 #' Clamp a vector's values to be between -1 and 1.
 #' @param a numeric vector
