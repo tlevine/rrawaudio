@@ -24,7 +24,6 @@ collision <- function (.t) {
   p <- phase[1+floor(t/8)%%length(phase)]
   b <- 2^base[1+floor(t)%%length(base)]/12
 
-
   x <- sin_(2000+sin(1/4)*8*(3+sin(1/8))/4,t%%4/8+1) *
     (1-sq(6))/2 * sin_(240+sin(200),t%%4/8+sin(400)/8/8/4) *
     (1-saw(4)*0.6-saw(2)*0.3-saw_(1,t-0.05)*0.4)/2 * 0.3 +

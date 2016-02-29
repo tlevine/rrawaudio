@@ -2,8 +2,7 @@
 #' @param frequency Frequency (440 is middle A.)
 #' @param seconds The time dimension, a vector of times in seconds
 sawtooth <- function(frequency, seconds)
-  (frequency * seconds) %% 2 - 1
-# saw_ (x,t) { return t%(1/x)*x*2-1 }
+  (seconds%%(1/frequency))*frequency*2-1
 
 #' Generate a sine wave.
 #' @param frequency Frequency (440 is middle A.)
