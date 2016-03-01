@@ -1,15 +1,17 @@
 # Adapted from Javascript
 # http://studio.substack.net/collision?time=1454555713931
 
-collision <- function (.t) {
-  # Parameters
-  melody <- c(3,3,-1,-1,8,9,5,5,5,5,6)
-  phase <- c(.07,.11,.04,.08,.13,.03)
-  base <- c(1,-5,2,8)
-  tempo <- 72/60
+main <- function() play(collision(melody=c(-1,3,2,-1))*.5)
+
+collision <- function(measures=4,
+                      melody = c(3,3,-1,-1,8,9,5,5,5,5,6),
+                      phase = c(.07,.11,.04,.08,.13,.03),
+                      base = c(1,-5,2,8),
+                      tempo = 72/60) {
+  duration <- measures/tempo
+  t <- seq(0, duration, length.out=duration*BITRATE) * tempo
 
   # Local instruments
-  t <- .t * tempo
   saw <- curry(sawtooth, t)
   sin <- curry(sine, t)
   tri <- curry(triangle, t)
@@ -33,10 +35,5 @@ collision <- function (.t) {
     (1-saw(2)*0.3-saw(1/2)*0.6)/2 * 0.8 +
     tri_(tri_(tri(600.29*b)/8,t%%2/4+.2),t%%1/2+.6+p) *
     (1-saw(1/2))/2 * 0.4
-  x
-}
-
-main <- function() {
-  t <- seq(30*BITRATE,35*BITRATE)/BITRATE
-  play(collision(t)*0.5)
+  x[!is.nan(x)]
 }
